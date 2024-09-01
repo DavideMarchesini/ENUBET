@@ -12,6 +12,7 @@
   - sigma is the number of std of the pedestal to which it eliminates the value
   - numberOfAnodes is the number of channels connected to the board
   - majority is a possible secondary majority with respect to the one of Janus
+
 The code works by first doing a gaussian fit of all the data, only events above a certain value mean+NumberOfSigma*sigmaFit, then by mapping and equalizing the detector, at the end we need to pass from a board based file to an event based and that is done by chosing the time coincidence window 
 - ANGLE.C: from a r, z, phi, LG and HG file execute a linear 3d fit returning a root file with azimuth, elevation, errror on both, direction X, direction Y, direction Z and relative errors, NDF and the MinFCN found
 - sum0.C execute the sum over each single channel and return a .txt file with the hit map values
