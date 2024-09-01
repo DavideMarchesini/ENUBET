@@ -1,7 +1,7 @@
 # ENUBET
 
 ##Contains 
-- FIX_MARCHESINI.C pass from a Run(numero)_list.root file to a completly fixed (e, z, phi, LG, HG, timestamp) thank to the mapping file (here called mappingMarchesini.txt), the MappingScript.h and the calibration given by the test beam (calibrationMarchesini)
+FIX_MARCHESINI.C pass from a Run(numero)_list.root file to a completly fixed (e, z, phi, LG, HG, timestamp) thank to the mapping file (here called mappingMarchesini.txt), the MappingScript.h and the calibration given by the test beam (calibrationMarchesini)
   The only sector to modify by defining the parameters
   - p is the file generated as mean and std of the pedestal
   - filename is the input file given by Janus
