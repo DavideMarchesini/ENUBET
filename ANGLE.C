@@ -27,7 +27,6 @@ struct SumDistance2 {
       XYZVector x1(151, p[2] + p[3], p[0] + p[1]);
       XYZVector u = (x1-x0).Unit();
       double d2 = ((xp-x0).Cross(u)).Mag2();
-      //double weight = 1 / (ex * ex + ey * ey + ez * ez);
       double weight = 1 / (ex * ex);
       return d2 * weight;
    }
@@ -36,7 +35,6 @@ struct SumDistance2 {
       double * x = fGraph->GetX();
       double * y = fGraph->GetY();
       double * z = fGraph->GetZ();
-      
       double *ex = fGraph->GetEX();
       double *ey = fGraph->GetEY();
       double *ez = fGraph->GetEZ();
@@ -81,7 +79,7 @@ void cylindrical_to_cartesian(int r, double z, double phi, double &x, double &y,
         y = RRR * std::cos(angle);
         z_out = DT * z + ZZ;
     }
-    }
+}
 void ANGLE(){
     TFile *fc = TFile::Open("output.root");
     if (!fc || fc->IsZombie()) {
@@ -160,9 +158,7 @@ void ANGLE(){
        }
        P_i_1 = TMath::Sqrt(sum_x2 / x.size());
        P_i_3 = TMath::Sqrt(sum_y2 / y.size());
-       
        double pStart[4] = {P_i_0, P_i_1, P_i_2, P_i_3};
-       
        fitter.SetFCN(fcn,pStart);
        for (int i = 0; i < 4; ++i) fitter.Config().ParSettings(i).SetStepSize(0.000001);
        bool ok = fitter.FitFCN();
@@ -183,7 +179,6 @@ void ANGLE(){
        errdirY= result.ParError(3)/n;
        azimuth = (TMath::ATan(dirY/dirZ))* 180 / TMath::Pi();
        elevation = abs(TMath::ATan(dirX/sqrt(dirY*dirY+dirZ*dirZ)) * 180 / TMath::Pi());
-       
        double dy_1=1/(1+pow(dirY/dirZ, 2))/dirZ, dz_1=1/(1+pow(dirY/dirZ, 2))*dirY/pow(dirZ, 2);
        double dy_2=1/(1+pow(dirX/sqrt(dirY*dirY+dirZ*dirZ), 2))*pow(dirX/(dirY*dirY+dirZ*dirZ), 2)*2*dirY, dz_2=1/(1+pow(dirX/sqrt(dirY*dirY+dirZ*dirZ), 2))*pow(dirX/(dirY*dirY+dirZ*dirZ), 2)*2*dirZ;
        errazimuth=180/TMath::Pi()*sqrt(pow(dy_1*errdirY,2)+pow(dz_1*errdirZ,2)+dy_1*dz_1*errdirY*errdirZ); 
@@ -205,5 +200,4 @@ void ANGLE(){
   tree->Write();
   output->Close();
   cout<<"out of events loop"<<endl;
-
 }
